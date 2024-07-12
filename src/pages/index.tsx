@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import { GoogleOutlined, FacebookOutlined, UserAddOutlined } from '@ant-design/icons'; 
 
 export default function Signup() {
-    const router = useRouter()
+    const router = useRouter();
 
     return (
         <>
@@ -16,25 +16,39 @@ export default function Signup() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#ddd0dc' }}>
-                <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
+                <div className="card" style={{ width: '90%', maxWidth: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
                     <div style={{ textAlign: 'center' }}>
                         <Logo />
                     </div>
                     <h2 className="text-center mb-4">Welcome to Page</h2>
-                    <div className="d-flex justify-content-center mb-4">
-                    </div>
-                    <button type="button" className="btn btn-danger btn-block mb-3 d-flex align-items-center justify-content-start" style={{ width: '100%' }} onClick={() => router.push('/Signup')}>
-                        <UserAddOutlined style={{ marginRight: '120px' }} /> Create new account
+                    <button 
+                        type="button" 
+                        className="btn btn-danger btn-block mb-3 d-flex align-items-center" 
+                        style={{ width: '100%' }} 
+                        onClick={() => router.push('/Signup')}
+                    >
+                        <UserAddOutlined style={{ marginRight: '10px' }} /> 
+                        <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Create new account</span>
                     </button>
-                    <button type="button" className="btn btn-warning btn-block mb-3 d-flex align-items-center justify-content-start" style={{ width: '100%' }}>
-                        <GoogleOutlined style={{ marginRight: '120px' }} /> Continue with Gmail
+                    <button 
+                        type="button" 
+                        className="btn btn-warning btn-block mb-3 d-flex align-items-center" 
+                        style={{ width: '100%' }}
+                    >
+                        <GoogleOutlined style={{ marginRight: '10px' }} /> 
+                        <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Continue with Gmail</span>
                     </button>
-                    <button type="button" className="btn btn-primary btn-block d-flex align-items-center justify-content-start" style={{ width: '100%' }}>
-                        <FacebookOutlined style={{ marginRight: '120px' }} /> Continue with Facebook
+                    <button 
+                        type="button" 
+                        className="btn btn-primary btn-block d-flex align-items-center" 
+                        style={{ width: '100%' }}
+                    >
+                        <FacebookOutlined style={{ marginRight: '10px' }} /> 
+                        <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Continue with Facebook</span>
                     </button>
-                    <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
+                    <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '20px' }}>
                         <p className="mb-0">You have an account already?</p>
-                        <button className="btn btn-link p-0 ml-2 " onClick={() => router.push('/signin')}>Sign in</button>
+                        <button className="btn btn-link p-0 ml-2" onClick={() => router.push('/signin')}>Sign in</button>
                     </div>
                 </div>
             </div>
