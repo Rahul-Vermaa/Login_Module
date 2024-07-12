@@ -32,10 +32,11 @@ toast.error(error.response.body.message)
     }
   };
 
+
   return (
     <>
       <Head>
-        <title>Sign In</title>
+        <title>Login_Module</title>
         <meta name="description" content="Sign in to your account" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
