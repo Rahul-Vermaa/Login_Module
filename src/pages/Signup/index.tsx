@@ -10,6 +10,7 @@ import nookies from 'nookies';
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
+
 export default function SignUp() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +23,7 @@ export default function SignUp() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
 
   const handleSignUp = async () => {
     try {
@@ -42,6 +44,7 @@ export default function SignUp() {
           }
   };
 
+  
   return (
     <>
       <Head>
@@ -57,7 +60,6 @@ export default function SignUp() {
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
         <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
         <ArrowLeftOutlined onClick={() => router.push('/')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
-
           <div style={{ textAlign: 'center' }}>
             <Logo />
           </div>

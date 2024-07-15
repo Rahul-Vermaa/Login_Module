@@ -39,7 +39,6 @@ export default function ForgotPassword() {
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
         <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
         <ArrowLeftOutlined onClick={() => router.push('/verifyotp')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
-
           <div style={{ textAlign: 'center' }}>
             <Logo />
           </div>

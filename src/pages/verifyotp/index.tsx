@@ -22,7 +22,6 @@ export default function OTPLogin() {
   };
 
   const handleVerifyOTP = async () => {
-
     const otpString = otp.join('');
     try {
       const response = await request.put('https://master.project.henceforthsolutions.com:3000/verify-otp')
@@ -34,10 +33,10 @@ export default function OTPLogin() {
         query: { uniId:router?.query?.uniId},
       });
     }  catch (error:any) {
-      toast.error(error.response.body.message)
-      
+      toast.error(error.response.body.message)    
           }
 }
+
 
   useEffect(() => {
     if (otpInputs.current[0]) {

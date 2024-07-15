@@ -26,7 +26,7 @@ export default function SignIn() {
       response = await request
         .post('https://master.project.henceforthsolutions.com:3000/signin')
         .send({ email, password, device_type: "WEB" });
-      router.push('/home');
+      router.push('/Interface');
     } catch (error:any) {
 toast.error(error.response.body.message)
     }
