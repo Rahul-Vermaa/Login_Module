@@ -8,6 +8,7 @@ import request from 'superagent';
 import 'react-toastify/dist/ReactToastify.css';
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import Cookies from 'js-cookie';
 
 export default function SignIn() {
   const router = useRouter();
@@ -21,13 +22,16 @@ export default function SignIn() {
   };
 
   const handleSignIn = async () => {
+    const token = Cookies.get('authToken');
     let response
     try {
       response = await request
         .post('https://master.project.henceforthsolutions.com:3000/signin')
-        .send({ email, password, device_type: "WEB" });
-      router.push('/Interface');
-    } catch (error:any) {
+        .send({ email, password, device_type: "WEB" })
+        Cookies.set('authToken', response.body.access_token);
+        router.push('/Interface');
+    }
+     catch (error:any) {
 toast.error(error.response.body.message)
     }
   };

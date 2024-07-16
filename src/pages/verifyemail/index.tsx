@@ -35,7 +35,7 @@ export default function OTPLogin() {
         router.push('/phoneverify');
     }  catch (error:any) {
       toast.error(error.response.body.message) 
-          }
+      }
   };
 
   useEffect(() => {

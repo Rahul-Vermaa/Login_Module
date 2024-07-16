@@ -18,7 +18,6 @@ export default function ForgotPassword() {
     try {
       const response = await superagent.put('https://master.project.henceforthsolutions.com:3000/forget-password')
         .send({ email });
-      console.log('Reset link sent successfully:', response.body);
       nookies.set(null, 'reset_token', response.body.token, { path: '/' });
       router.push({
         pathname: '/verifyotp',
