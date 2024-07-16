@@ -1,10 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Styles from '../navbar.module.css';
-import Footer from '../Footer';
+import Footer from '../Interface/Footer';
 import { IoIosArrowForward } from 'react-icons/io';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from 'superagent';
 import router from 'next/router';
+import { MyContext } from '@/context/provider';
 
 export default function PersonalInfo() {
   const [userInfo, setUserInfo] = useState({
@@ -14,19 +15,7 @@ export default function PersonalInfo() {
     email: ''
   });
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      let Uniqueid = router.query._id
-      try {
-        const response = await request.get(`https://master.project.henceforthsolutions.com:3000/users/${Uniqueid}`)
-        setUserInfo(response.body.data);
-      } catch (error) {
-        console.error('Error fetching user info:', error);
-      }
-    };
-    fetchUserInfo();
-  }, []);
-
+  const {state} = React.useContext(MyContext)
   
   return (
     <>
@@ -46,10 +35,10 @@ export default function PersonalInfo() {
       </button>  <IoIosArrowForward /> Personal Info </p>
             <h1>Personal Info</h1>
             <div className="mt-4">
-              <p><strong>Name:</strong> {userInfo.name}</p>
-              <p><strong>Phone Number:</strong> {userInfo.phoneNumber}</p>
-              <p><strong>Country Code:</strong> {userInfo.countryCode}</p>
-              <p><strong>Email:</strong> {userInfo.email}</p>
+              <p><strong>Name:</strong> {state.first_name}</p>
+              <p><strong>Phone Number:</strong> {state.phone}</p>
+              <p><strong>Country Code:</strong> {state.country_code}</p>
+              <p><strong>Email:</strong> {state.email}</p>
             </div>
           </div>
         </div>

@@ -4,18 +4,16 @@ import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsPersonFillLock, BsPersonVcard } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
-import '../pages/navbar.module.css'
 import { IoIosArrowForward } from "react-icons/io";
+
 
 const MiddleContent = () => {
     const router = useRouter();
-  
-
     return (
         <div className="container my-5">
             <h1 className="mb-4">My Account</h1>
             <div className="row">
-                <div className="col-md-4 mb-4" style={{cursor:'grab'}}>
+                <div className="col-md-4 mb-4" style={{cursor:'pointer'}}>
                     <Card onClick={() => router.push('./personalinfo')} className="h-100">
                         <Card.Body>
                         <BsPersonVcard size={40} />
@@ -27,7 +25,7 @@ const MiddleContent = () => {
                         </Card.Body>
                     </Card>
                 </div>
-                <div className="col-md-4 mb-4"  style={{cursor:'grab'}}>
+                <div className="col-md-4 mb-4"  style={{cursor:'pointer'}}>
                     <Card onClick={() => router.push('./changepassword')} className="h-100">
                         <Card.Body>
                         <BsPersonFillLock size={40} />
@@ -38,7 +36,7 @@ const MiddleContent = () => {
                         </Card.Body>
                     </Card>
                 </div>
-                <div className="col-md-4 mb-4"   style={{cursor:'grab'}}>
+                <div className="col-md-4 mb-4"   style={{cursor:'pointer'}}>
                     <Card onClick={() => router.push('./notificationsetting')} className="h-100">
                         <Card.Body>
                         <MdOutlineNotificationsActive size={40} />

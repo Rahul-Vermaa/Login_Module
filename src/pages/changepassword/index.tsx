@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Styles from '../navbar.module.css';
-import Footer from '../Footer';
+import Footer from '../Interface/Footer';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useState } from 'react';
 import superagent from 'superagent';

@@ -3,17 +3,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'; 
 import Logo from "../Logo";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import request from 'superagent';
 import 'react-toastify/dist/ReactToastify.css';
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Cookies from 'js-cookie';
+import { MyContext, MyProvider } from "@/context/provider";
 
 export default function SignIn() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
+  const {state, setState} = React.useContext(MyContext);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -28,6 +30,7 @@ export default function SignIn() {
       response = await request
         .post('https://master.project.henceforthsolutions.com:3000/signin')
         .send({ email, password, device_type: "WEB" })
+        setState(response.body);
         Cookies.set('authToken', response.body.access_token);
         router.push('/Interface');
     }
