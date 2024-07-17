@@ -7,6 +7,7 @@ import router from 'next/router';
 import { MyContext } from '@/context/provider';
 import superagent from 'superagent';
 import Cookies from 'js-cookie';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function PersonalInfo() {
@@ -16,6 +17,7 @@ export default function PersonalInfo() {
     first_name: false,
     email: false,
     phone: false,
+    country_code:false
   });
 
   
@@ -29,12 +31,27 @@ export default function PersonalInfo() {
 
 
   const handleEditToggle = (field:any) => {
-    setIsEditing({
-      ...isEditing,
-      [field]: !isEditing[field]
-  });
-    if (isEditing[field]) {
-      handleSubmit(field);
+    
+    let arr = field.split('/');
+    
+    if(arr.length>1){
+      setIsEditing({
+        ...isEditing,
+        [arr[0]]: !isEditing[arr[0]],
+        [arr[1]]:!isEditing[arr[1]]
+    });
+      if (isEditing[arr[0]] || isEditing[arr[1]]) {
+        handleSubmit(arr);
+      }
+    }
+    else{
+      setIsEditing({
+        ...isEditing,
+        [field]: !isEditing[field]
+    });
+      if (isEditing[field]) {
+        handleSubmit(field);
+      }
     }
   };
 
@@ -49,22 +66,19 @@ export default function PersonalInfo() {
         phone: 'https://master.project.henceforthsolutions.com:3000/phone',
       } as any;
 
+
       const payloadMap = {
         first_name:  state.first_name,
         email:  state.email ,
-        country_code : state.country_code,
-        phone: state.phone, 
-     
-
+        phone: {
+          country_code: state.country_code,
+          phone: state.phone,
+        },
       } as any;
-      console.log(payloadMap[field],"eeeeeeeee");
-
-      let apires = await superagent.patch(endpointMap[field]).send({[field]:payloadMap[field]}).set('Authorization', `Bearer ${token}`);
-      // setState(apires.body);
-      alert('Update successful');
-    } catch (error) {
-      console.error(error);
-      alert('Update failed');
+       await superagent.patch(endpointMap[Array.isArray(field)?field[0]:field]).send(Array.isArray(field)? {[field[0]]:payloadMap[field[0]][field[0]],[field[1]]:payloadMap[field[0]][field[1]]} :{[field]:payloadMap[field]}).set('Authorization', `Bearer ${token}`);
+      toast('Successfully Changed');
+    } catch (error:any) {
+      toast(error.response.body.message);
     }
   };
 
@@ -100,6 +114,10 @@ export default function PersonalInfo() {
             <IoIosArrowForward /> Personal Info
           </div>
           <h1>Personal Info</h1>
+          <Toaster
+  position="top-right"
+  reverseOrder={false}
+/>
           <div className="mt-4">
             <div className="card mb-3">
               <div className="card-body d-flex justify-content-between align-items-center">
@@ -171,9 +189,9 @@ export default function PersonalInfo() {
                 </div>
                 <button
                   className="btn btn-danger"
-                  onClick={() => handleEditToggle('phone')}
+                  onClick={() => handleEditToggle('phone/country_code')}
                 >
-                  {isEditing.phone ? 'Save' : 'Change'}
+                  {(isEditing.phone || isEditing.country_code) ? 'Save' : 'Change'}
                 </button>
               </div>
             </div>
