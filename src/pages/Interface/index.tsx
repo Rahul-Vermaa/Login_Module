@@ -3,10 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import  Styles  from  "../navbar.module.css";
 import Footer from "./Footer";
 import MiddleContent from "./midbody";
+import { MyContext } from "@/context/provider";
+import { useContext } from "react";
 
 
 
 export default function Signup() {
+    const { state } = useContext(MyContext);
+    
     return (
         <>
             <Head>
@@ -15,8 +19,10 @@ export default function Signup() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="container-fluid " style={{display:'flex'}} >
-            <nav className={Styles.navbar}> 
+           <div className='h-100' style={{ width:'100vw'}}>
+           <div className="container-fluid " style={{display:'flex'}} >
+            <nav className={Styles.navbar}> <p style={{border:'3px solid black' ,  marginTop:'17px', borderRadius:'7px' , width:'75px' , textAlign:'center' , marginLeft:'1200px'}}>{state.first_name}
+                </p>
            </nav>
             </div>
             <div className="Middle-Content">
@@ -25,6 +31,7 @@ export default function Signup() {
             <div  className="Footer-section"  >
              <Footer/>
             </div>
+           </div>
         </>
     );
 }

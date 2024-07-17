@@ -3,18 +3,21 @@ import Styles from '../navbar.module.css'
 import Footer from '../Interface/Footer';
 import { IoIosArrowForward } from 'react-icons/io';
 import Router from 'next/router';
+import { MyContext } from '@/context/provider';
+import { useContext } from 'react';
 
 export default function notification() {
-
+  const { state } = useContext(MyContext);
 
   return (
     <>
      <div>
      <div className="container-fluid " style={{display:'flex'}} >
     <nav className={Styles.navbar}> 
-    </nav>
+    <p style={{border:'3px solid black' ,  marginTop:'17px', borderRadius:'7px' , width:'75px' , textAlign:'center' , marginLeft:'1200px'}}>{state.first_name}
+    </p>  </nav>
      </div>
-     <div className="container my-5">
+     <div className="container my-5" style={{minHeight:'371px'}}>
      <p className="mb-4">  <button 
         className="btn btn-link p-0 ml-2"
         onClick={() => Router.push('/Interface')}

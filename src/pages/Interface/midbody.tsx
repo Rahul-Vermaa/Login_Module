@@ -4,13 +4,14 @@ import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsPersonFillLock, BsPersonVcard } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
+import Cookies from 'js-cookie';
 import { IoIosArrowForward } from "react-icons/io";
 
 
 const MiddleContent = () => {
     const router = useRouter();
     return (
-        <div className="container my-5">
+        <div className="container my-5" style={{minHeight:'370px'}}>
             <h1 className="mb-4">My Account</h1>
             <div className="row">
                 <div className="col-md-4 mb-4" style={{cursor:'pointer'}}>
@@ -48,7 +49,7 @@ const MiddleContent = () => {
                     </Card>
                 </div>
             </div>
-            <Button variant="danger" className="mt-3" >
+            <Button variant="danger" className="mt-3" onClick={()=>{Cookies.remove('authToken');router.push('/')}}>
                 Logout
             </Button>
         </div>

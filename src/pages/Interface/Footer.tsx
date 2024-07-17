@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGooglePlay, FaAppStor
 
 export default function Footer() {
     return (
-        <div className="container-fluid bg-danger text-white py-3 fixed-bottom d-flex flex-column align-items-center" style={{ height: '200px' }}>
+        <div className="container-fluid bg-danger text-white py-3 d-flex flex-column align-items-center" style={{ height: '200px' , position:'relative' , bottom:'0px'}}>
             <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '25px' }}>
                 <FaFacebook size={30} className="mx-2" />
                 <FaTwitter size={30} className="mx-2" />

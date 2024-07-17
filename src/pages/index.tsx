@@ -1,11 +1,16 @@
 import Head from "next/head";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from "next/router"; 
+import Cookies from 'js-cookie';
 import Logo from "./Logo";
 import { GoogleOutlined, FacebookOutlined, UserAddOutlined } from '@ant-design/icons'; 
+import { useEffect } from "react";
 
 export default function Signup() {
     const router = useRouter();
+    useEffect(()=>{
+        Cookies.remove('authToken')
+    },[])
 
     return (
         <>

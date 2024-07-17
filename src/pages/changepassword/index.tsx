@@ -2,19 +2,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Styles from '../navbar.module.css';
 import Footer from '../Interface/Footer';
 import { IoIosArrowForward } from 'react-icons/io';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import superagent from 'superagent';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 import router from 'next/router';
+import { MyContext } from '@/context/provider';
 
 export default function ChangePassword() {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
-
+  const { state } = useContext(MyContext);
   const handlePasswordChange = async () => {
+
+
     const token = Cookies.get('authToken');
     try {
       const response = await superagent
@@ -32,7 +35,8 @@ export default function ChangePassword() {
     <>
       <div>
         <div className="container-fluid" style={{ display: 'flex' }}>
-          <nav className={Styles.navbar}></nav>
+          <nav className={Styles.navbar}><p style={{border:'3px solid black' ,  marginTop:'17px', borderRadius:'7px' , width:'75px' , textAlign:'center' , marginLeft:'1200px'}}>{state.first_name}
+          </p></nav>
         </div>
       </div>
       <Toaster
@@ -50,7 +54,7 @@ export default function ChangePassword() {
       </button>  <IoIosArrowForward /> notifications
         </p>
         <h1>Change Password</h1>
-        <div className="form-group" style={{ marginTop: '40px', width: '440px' }}>
+        <div className="form-group" style={{ marginTop: '40px', width: '440px', minHeight:'232px' }}>
           <div className="input-group mb-3">
             <input
               type="password"

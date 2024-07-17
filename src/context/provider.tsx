@@ -20,6 +20,7 @@ export const MyProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect( () => { 
         const token = Cookies.get('authToken') 
+        console.log(token,"tytytytyt");
         if (token) { 
             try { 
                 const decodedToken:{id:string} = jwtDecode(token) ; 
@@ -34,7 +35,7 @@ export const MyProvider = ({ children }: { children: ReactNode }) => {
         } 
     }, []);
 
-    
+
     return (
         <MyContext.Provider value={{ state, setState }}>
             {children}
