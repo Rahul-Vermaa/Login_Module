@@ -25,7 +25,8 @@ export default function ChangePassword() {
         .send({ fcm_token: "alklsak",  old_password:oldPassword, new_password:newPassword })
         .set('Authorization', `Bearer ${token}`);
         setMessage(response.text);
-        // Router.push('/Interface');
+      alert("Change succesfully") 
+       Router.push('/Interface');
       }  catch (error:any) {
         toast.error(error.response.body.message)
             }

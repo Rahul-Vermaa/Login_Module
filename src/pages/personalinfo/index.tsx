@@ -16,9 +16,9 @@ export default function PersonalInfo() {
     first_name: false,
     email: false,
     phone: false,
-    country_code : false 
   });
 
+  
   const handleChange = (e:any) => {
     const { name, value } = e.target;
     setState({
