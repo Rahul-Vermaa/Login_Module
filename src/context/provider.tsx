@@ -3,6 +3,7 @@ import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import request from 'superagent';
+import { useRouter } from 'next/router';
 interface MyContextType {
     state: any;
     setState: React.Dispatch<React.SetStateAction<any>>;
@@ -17,6 +18,7 @@ export const MyContext = createContext<MyContextType>(defaultState);
 
 export const MyProvider = ({ children }: { children: ReactNode }) => {
     const [state, setState] = useState<any>({});
+    const router = useRouter();
 
     useEffect( () => { 
         const token = Cookies.get('authToken') 
@@ -32,6 +34,9 @@ export const MyProvider = ({ children }: { children: ReactNode }) => {
             } catch (error) { 
                 console.error('Invalid token:', error); 
             } 
+        }
+        else{
+            router.push('/');
         } 
     }, []);
 

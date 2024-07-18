@@ -36,7 +36,7 @@ export default function ChangePassword() {
     <>
       <div>
         <div className="container-fluid" style={{ display: 'flex' }}>
-          <nav className={Styles.navbar}><p style={{border:'3px solid black' ,  marginTop:'17px', borderRadius:'7px' , width:'75px' , textAlign:'center' , marginLeft:'1200px'}}>{state.first_name}
+          <nav className={Styles.navbar}><p style={{border:'3px solid black' ,  marginTop:'17px', borderRadius:'7px' , width:'75px' , textAlign:'center' , marginLeft:'1200px' , color:'red'}}>{state.first_name}
           </p></nav>
         </div>
       </div>

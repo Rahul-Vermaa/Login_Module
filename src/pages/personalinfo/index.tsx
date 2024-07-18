@@ -96,6 +96,7 @@ export default function PersonalInfo() {
                 width: '75px',
                 textAlign: 'center',
                 marginLeft: '1200px',
+                color:'red'
               }}
             >
               {state.first_name}

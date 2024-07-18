@@ -21,7 +21,7 @@ export default function Signup() {
             </Head>
            <div className='h-100' style={{ width:'100vw'}}>
            <div className="container-fluid " style={{display:'flex'}} >
-            <nav className={Styles.navbar}> <p style={{border:'3px solid black' ,  marginTop:'17px', borderRadius:'7px' , width:'75px' , textAlign:'center' , marginLeft:'1200px'}}>{state.first_name}
+            <nav className={Styles.navbar}> <p className="text-danger py-1 px-3" style={{border:'3px solid grey' ,  marginTop:'17px', borderRadius:'5px' , width:'75px' , textAlign:'center' , marginLeft:'1200px' }}>{state.first_name}
                 </p>
            </nav>
             </div>
