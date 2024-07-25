@@ -1,6 +1,6 @@
 import Head from "next/head";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Logo from "../Logo";
+import Logo from "../../component/Logo";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import superagent from 'superagent';

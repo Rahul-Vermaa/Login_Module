@@ -1,4 +1,4 @@
-import image from "./images.jpeg"
+import image from "../Assets/images.jpeg"
 
 function Logo() {
   return (

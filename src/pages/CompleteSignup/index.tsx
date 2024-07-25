@@ -2,7 +2,7 @@ import Head from "next/head";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import img from '../Completeimg.png';
+import img from '../../Assets/Completeimg.png';
 
 export default function CompleteSignup() {
   const router = useRouter();

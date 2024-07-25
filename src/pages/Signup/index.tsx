@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from 'react';
 import { useRouter } from "next/router";
-import Logo from "../Logo";
+import Logo from "../../component/Logo";
 import superagent from 'superagent';
 import Cookies from 'js-cookie';
 import nookies from 'nookies';

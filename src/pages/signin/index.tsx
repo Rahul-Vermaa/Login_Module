@@ -1,7 +1,7 @@
 import Head from "next/head";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'; 
-import Logo from "../Logo";
+import Logo from "../../component/Logo";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import request from 'superagent';
@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Cookies from 'js-cookie';
-import { MyContext, MyProvider } from "@/context/provider";
+import { MyContext} from "@/context/provider";
 
 export default function SignIn() {
   const router = useRouter();
@@ -27,17 +27,16 @@ export default function SignIn() {
     const token = Cookies.get('authToken');
     let response
     try {
-      response = await request
-        .post('https://master.project.henceforthsolutions.com:3000/signin')
+      response = await request.post('https://master.project.henceforthsolutions.com:3000/signin')
         .send({ email, password, device_type: "WEB" })
         setState(response.body);
         Cookies.set('authToken', response.body.access_token);
         router.push('/welcome');
     }
      catch (error:any) {
-toast.error(error.response.body.message)
-    }
-  };
+     toast.error(error.response.body.message)
+      }
+    };
 
 
   return (
@@ -49,9 +48,9 @@ toast.error(error.response.body.message)
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster
-  position="top-right"
-  reverseOrder={false}
-/>
+   position="top-right"
+   reverseOrder={false}
+   />
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
         <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
         <ArrowLeftOutlined onClick={() => router.push('/')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
