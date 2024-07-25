@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Styles from '../navbar.module.css';
-import Footer from '../Interface/Footer';
+import Footer from '../welcome/Footer';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useContext, useState } from 'react';
 import superagent from 'superagent';
@@ -9,6 +9,7 @@ import Router from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 import router from 'next/router';
 import { MyContext } from '@/context/provider';
+import image from '../male-face-avatar-on-white-260nw-562359640.webp'
 
 export default function ChangePassword() {
   const [oldPassword, setOldPassword] = useState('');
@@ -24,31 +25,38 @@ export default function ChangePassword() {
         .put('https://master.project.henceforthsolutions.com:3000/change-password')
         .send({ fcm_token: "alklsak",  old_password:oldPassword, new_password:newPassword })
         .set('Authorization', `Bearer ${token}`);
-        setMessage(response.text);
-      alert("Change succesfully") 
+         setMessage(response.text);
+         alert("Change succesfully") 
        Router.push('/Interface');
       }  catch (error:any) {
         toast.error(error.response.body.message)
             }
   };
 
+
   return (
     <>
       <div>
         <div className="container-fluid" style={{ display: 'flex' }}>
-          <nav className={Styles.navbar}><p style={{border:'3px solid black' ,  marginTop:'17px', borderRadius:'7px' , width:'75px' , textAlign:'center' , marginLeft:'1200px' , color:'red'}}>{state.first_name}
-          </p></nav>
+          <nav className={Styles.navbar}>  <p className="text-danger py-1 px-3" style={{border:'3px solid grey' ,  marginTop:'17px', borderRadius:'5px' , width:'140px' ,height:"48px", textAlign:'center' , marginLeft:'1200px' }}>  <img src={`http://139.59.47.49:4004/api/profile_image?profile_image=${state.profile_pic}`} style={
+    {
+        width: '40px',  
+       height: '38px', borderRadius: '50%', objectFit: 'cover' ,position:'relative', right:'11px'
+    }
+}
+/>{state.first_name}
+              </p></nav>
         </div>
       </div>
       <Toaster
-  position="top-right"
-  reverseOrder={false}
-/>
+    position="top-right"
+    reverseOrder={false}
+   />
       <div className="container my-5">
         <p className="mb-4">
         <button 
         className="btn btn-link p-0 ml-2"
-        onClick={() => router.push('/Interface')}
+        onClick={() => router.push('/welcome')}
         style={{ color: 'black', textDecoration: 'none' }}
       >
         My account

@@ -32,7 +32,7 @@ export default function SignIn() {
         .send({ email, password, device_type: "WEB" })
         setState(response.body);
         Cookies.set('authToken', response.body.access_token);
-        router.push('/Interface');
+        router.push('/welcome');
     }
      catch (error:any) {
 toast.error(error.response.body.message)

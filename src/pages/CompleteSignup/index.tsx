@@ -7,12 +7,14 @@ import img from '../Completeimg.png';
 export default function CompleteSignup() {
   const router = useRouter();
 
+  
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push('/signin');
+      router.push('/');
     }, 2000); 
     return () => clearTimeout(timer); 
   }, [router]);
+
 
   return (
     <>

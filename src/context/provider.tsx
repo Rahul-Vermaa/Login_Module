@@ -11,7 +11,7 @@ interface MyContextType {
 
 const defaultState: MyContextType = {
     state: {},
-    setState: () => { },
+    setState: () => {},
 };
 
 export const MyContext = createContext<MyContextType>(defaultState);
@@ -28,7 +28,8 @@ export const MyProvider = ({ children }: { children: ReactNode }) => {
                 const decodedToken:{id:string} = jwtDecode(token) ; 
                 console.log(decodedToken,"tototototo");
                 (async ()=>{
-                    const response = await request.get(`https://master.project.henceforthsolutions.com:3000/users/${decodedToken.id}`).set('Authorization', `Bearer ${token}`);
+                    const response = await request.get(`https://master.project.henceforthsolutions.com:3000/users/profile`).set('Authorization', `Bearer ${token}`);
+                    // console.log(response.body, "alalalala")
                     setState(response.body); 
                 })()
             } catch (error) { 

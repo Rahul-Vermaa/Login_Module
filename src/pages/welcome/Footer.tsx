@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGooglePlay, FaAppStoreIos } from 'react-icons/fa';
+import  './footer.module.css'
+
 
 export default function Footer() {
     return (
         <div className="container-fluid bg-danger text-white py-3 d-flex flex-column align-items-center" style={{ height: '200px' , position:'relative' , bottom:'0px'}}>
             <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '25px' }}>
-                <FaFacebook size={30} className="mx-2" />
+                <FaFacebook  size={30} className="mx-2" />
                 <FaTwitter size={30} className="mx-2" />
                 <FaInstagram size={30} className="mx-2" />
                 <FaLinkedin size={30} className="mx-2" />

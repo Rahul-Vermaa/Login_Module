@@ -5,8 +5,7 @@ import Footer from "./Footer";
 import MiddleContent from "./midbody";
 import { MyContext } from "@/context/provider";
 import { useContext } from "react";
-
-
+import image from "../male-face-avatar-on-white-260nw-562359640.webp"
 
 export default function Signup() {
     const { state } = useContext(MyContext);
@@ -21,9 +20,16 @@ export default function Signup() {
             </Head>
            <div className='h-100' style={{ width:'100vw'}}>
            <div className="container-fluid " style={{display:'flex'}} >
-            <nav className={Styles.navbar}> <p className="text-danger py-1 px-3" style={{border:'3px solid grey' ,  marginTop:'17px', borderRadius:'5px' , width:'75px' , textAlign:'center' , marginLeft:'1200px' }}>{state.first_name}
-                </p>
-           </nav>
+            <nav className={Styles.navbar}>
+              <p className="text-danger py-1 px-3" style={{border:'3px solid grey' ,  marginTop:'17px', borderRadius:'5px' , width:'140px' ,height:"48px", textAlign:'center' , marginLeft:'1200px' }}>  <img src={`http://139.59.47.49:4004/api/profile_image?profile_image=${state.profile_pic}`} style={
+           {
+        width: '40px',  
+      height: '38px', borderRadius: '50%', objectFit: 'cover' ,position:'relative', right:'11px'
+              }
+              }
+            />{state.first_name}
+              </p>
+            </nav>
             </div>
             <div className="Middle-Content">
             <MiddleContent/>

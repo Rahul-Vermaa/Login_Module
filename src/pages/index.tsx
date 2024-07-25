@@ -30,7 +30,7 @@ export default function Signup() {
                         type="button" 
                         className="btn btn-danger btn-block mb-3 d-flex align-items-center" 
                         style={{ width: '100%' }} 
-                        onClick={() => router.push('/Signup')}
+                        onClick={() => router.push('/uploadProfileImage')}
                     >
                         <UserAddOutlined style={{ marginRight: '10px' }} /> 
                         <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Create new account</span>
