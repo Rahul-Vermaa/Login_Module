@@ -138,8 +138,8 @@ export default function PersonalInfo() {
             <div className="col-md-7">
               <div className="mt-4">
                 <div className="card mb-3">
-                  <div className="card-body d-flex justify-content-between align-items-center">
-                    <div>
+                  <div  style={{boxShadow:"0 5px 2px -1px gray"}} className="card-body d-flex justify-content-between align-items-center">
+                    <div > 
                       <h5 className="card-title">Name</h5>
                       <input
                         style={{ width: '400px' }}
@@ -160,7 +160,7 @@ export default function PersonalInfo() {
                   </div>
                 </div>
                 <div className="card mb-3">
-                  <div className="card-body d-flex justify-content-between align-items-center">
+                  <div  style={{boxShadow:"0 5px 2px -1px gray"}} className="card-body d-flex justify-content-between align-items-center">
                     <div>
                       <h5 className="card-title">Email</h5>
                       <input
@@ -181,8 +181,8 @@ export default function PersonalInfo() {
                     </button>
                   </div>
                 </div>
-                <div className="card mb-3">
-                  <div className="card-body d-flex justify-content-between align-items-center">
+                <div className="card mb-">
+                  <div  style={{boxShadow:"0 5px 2px -1px gray"}} className="card-body d-flex justify-content-between align-items-center">
                     <div>
                       <h5 className="card-title">Phone</h5>
                       <input
@@ -215,13 +215,13 @@ export default function PersonalInfo() {
                 </div>
               </div>
             </div>
-            <div style={{ border: '3px solid grey', width: '290px', height: '250px', position: 'relative', left: '190px', borderRadius: '3px', top: '20px' }} className="col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div style={{ border: '2px solid grey', width: '290px', height: '250px', position: 'relative', left: '190px', borderRadius: '3px', top: '20px'}} className="col-md-6 d-flex flex-column align-items-center justify-content-center">
       {file ? (
         <img src={URL.createObjectURL(file)} alt="" style={{ border: "2px solid grey", width: '150px', height: '150px', borderRadius: '50%', objectFit: 'cover' }} />
       ) : (
         <img src={`http://139.59.47.49:4004/api/profile_image?profile_image=${state.profile_pic}`} alt="" style={{ border: "2px solid grey", width: '150px', height: '150px', borderRadius: '50%', objectFit: 'cover' }} />
       )}
-      <div className="mt-4">
+      <div className="mt-4" >
         <Upload
           showUploadList={false}
           beforeUpload={(file) => {

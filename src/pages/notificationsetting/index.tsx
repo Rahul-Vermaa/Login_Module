@@ -5,10 +5,10 @@ import { IoIosArrowForward } from 'react-icons/io';
 import Router from 'next/router';
 import { MyContext } from '@/context/provider';
 import { useContext } from 'react';
-import image from '../male-face-avatar-on-white-260nw-562359640.webp'
 
 export default function notification() {
   const { state } = useContext(MyContext);
+
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function notification() {
     <nav className={Styles.navbar}> 
     <p className="text-danger py-1 px-3" style={{border:'3px solid grey' ,  marginTop:'17px', borderRadius:'5px' , width:'140px' ,height:"48px", textAlign:'center' , marginLeft:'1200px' }}>  <img src={`http://139.59.47.49:4004/api/profile_image?profile_image=${state.profile_pic}`} style={
     {
-        width: '40px',  
+     width: '40px',  
      height: '38px', borderRadius: '50%', objectFit: 'cover' ,position:'relative', right:'11px'
     }
 }

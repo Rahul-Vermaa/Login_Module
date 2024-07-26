@@ -23,7 +23,6 @@ messaging.onBackgroundMessage((payload) => {
     icon: '/firebase-logo.png',
     data: { url: link }
   };
-
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
 

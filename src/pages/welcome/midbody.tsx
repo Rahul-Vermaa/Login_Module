@@ -14,8 +14,8 @@ const MiddleContent = () => {
         <div className="container my-5" style={{minHeight:'370px'}}>
             <h1 className="mb-4">My Account</h1>
             <div className="row">
-                <div className="col-md-4 mb-4" style={{cursor:'pointer'}}>
-                    <Card onClick={() => router.push('./personalinfo')} className="h-100">
+                <div className="col-md-4 mb-4" style={{cursor:'pointer' }}>
+                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={() => router.push('./personalinfo')} className="h-100">
                         <Card.Body>
                         <BsPersonVcard size={40} />
                         <Card.Title>Personal Info <IoIosArrowForward />
@@ -27,7 +27,7 @@ const MiddleContent = () => {
                     </Card>
                 </div>
                 <div className="col-md-4 mb-4"  style={{cursor:'pointer'}}>
-                    <Card onClick={() => router.push('./changepassword')} className="h-100">
+                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={() => router.push('./changepassword')} className="h-100">
                         <Card.Body>
                         <BsPersonFillLock size={40} />
                             <Card.Title>Change Password <IoIosArrowForward /></Card.Title>
@@ -38,7 +38,7 @@ const MiddleContent = () => {
                     </Card>
                 </div>
                 <div className="col-md-4 mb-4"   style={{cursor:'pointer'}}>
-                    <Card onClick={() => router.push('./notificationsetting')} className="h-100">
+                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={() => router.push('./notificationsetting')} className="h-100">
                         <Card.Body>
                         <MdOutlineNotificationsActive size={40} />
                             <Card.Title>Notifications <IoIosArrowForward /></Card.Title>
