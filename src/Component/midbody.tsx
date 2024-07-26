@@ -1,21 +1,46 @@
-
 import { Card, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsPersonFillLock, BsPersonVcard } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
-import Cookies from 'js-cookie';
 import { IoIosArrowForward } from "react-icons/io";
+import { useState } from 'react';
+import { Spin } from 'antd';
 
 
 const MiddleContent = () => {
     const router = useRouter();
+const[loading , setLoading]= useState(false)
+
+    const handleCreateAccountClick = () => {
+        setLoading(true);
+        router.push('/personalinfo');
+        };
+
+    const handleClick = () => {
+        setLoading(true);
+        router.push('/changepassword');
+    };
+
+    const handleClickk = () => {
+        setLoading(true);
+        router.push('/notificationsetting');
+    };
+
+    const logout = () => {
+        setLoading(true);
+        router.push('/');
+    };
+
+
+
+
     return (
         <div className="container my-5" style={{minHeight:'370px'}}>
             <h1 className="mb-4">My Account</h1>
-            <div className="row">
+          <Spin spinning={loading}>            <div className="row">
                 <div className="col-md-4 mb-4" style={{cursor:'pointer' }}>
-                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={() => router.push('./personalinfo')} className="h-100">
+                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={handleCreateAccountClick} className="h-100">
                         <Card.Body>
                         <BsPersonVcard size={40} />
                         <Card.Title>Personal Info <IoIosArrowForward />
@@ -27,7 +52,7 @@ const MiddleContent = () => {
                     </Card>
                 </div>
                 <div className="col-md-4 mb-4"  style={{cursor:'pointer'}}>
-                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={() => router.push('./changepassword')} className="h-100">
+                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={handleClick} className="h-100">
                         <Card.Body>
                         <BsPersonFillLock size={40} />
                             <Card.Title>Change Password <IoIosArrowForward /></Card.Title>
@@ -38,7 +63,7 @@ const MiddleContent = () => {
                     </Card>
                 </div>
                 <div className="col-md-4 mb-4"   style={{cursor:'pointer'}}>
-                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={() => router.push('./notificationsetting')} className="h-100">
+                    <Card style={{boxShadow:"0 5px 2px -2px gray"}} onClick={handleClickk} className="h-100">
                         <Card.Body>
                         <MdOutlineNotificationsActive size={40} />
                             <Card.Title>Notifications <IoIosArrowForward /></Card.Title>
@@ -49,7 +74,8 @@ const MiddleContent = () => {
                     </Card>
                 </div>
             </div>
-            <Button variant="danger" className="mt-3" onClick={()=>{Cookies.remove('authToken');router.push('/')}}>
+            </Spin>
+            <Button variant="danger" className="mt-3" onClick={logout}>
                 Logout
             </Button>
         </div>

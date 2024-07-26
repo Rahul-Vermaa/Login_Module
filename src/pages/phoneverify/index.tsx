@@ -7,13 +7,15 @@ import request from 'superagent';
 import Cookies from 'js-cookie';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import toast, { Toaster } from 'react-hot-toast';
+import { Spin } from 'antd';
+
 
 
 export default function OTPLogin() {
   const router = useRouter();
   const [otp, setOtp] = useState(['', '', '', '']);
   const otpInputs = useRef<HTMLInputElement[]>([]); 
-
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (index: number, value: string) => {
     const newOtp = [...otp];
@@ -31,6 +33,7 @@ export default function OTPLogin() {
     let otpString = otp.join('');
     otpString=otpString.trim();
     try {
+      setLoading(true)
       const response = await request.put('https://master.project.henceforthsolutions.com:3000/verify-phone')
         .send({ otp: Number(otpString) , fcm_token: "alklsak" }).set('Authorization', `Bearer ${token}`);
       console.log('OTP verified successfully:', response.body);
@@ -38,6 +41,7 @@ export default function OTPLogin() {
     }catch (error:any) {
      toast.error(error.response.body.message)
       }
+      setLoading(false)
   };
 
 
@@ -57,9 +61,10 @@ export default function OTPLogin() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster
-  position="top-right"
+  position="top-center"
   reverseOrder={false}
 />
+<Spin spinning={loading}>
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
         <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
         <ArrowLeftOutlined onClick={() => router.push('/verifyemail')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
@@ -100,6 +105,7 @@ export default function OTPLogin() {
         </div>
         
       </div>
+      </Spin>
     </>
   );
 }

@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGooglePlay, FaAppStoreIos } from 'react-icons/fa';
-import  './footer.module.css'
 
 
 export default function Footer() {

@@ -6,11 +6,13 @@ import Logo from '../Logo';
 import request from 'superagent';
 import toast, { Toaster } from 'react-hot-toast';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 
 export default function OTPLogin() {
   const router = useRouter();
   const [otp, setOtp] = useState(['', '', '', '']);
   const otpInputs = useRef<HTMLInputElement[]>([]); 
+const [loading , setLoading] = useState(false)
 
   const handleInputChange = (index: number, value: string) => {
     const newOtp = [...otp];
@@ -24,6 +26,7 @@ export default function OTPLogin() {
   const handleVerifyOTP = async () => {
     const otpString = otp.join('');
     try {
+      setLoading(true)
       const response = await request.put('https://master.project.henceforthsolutions.com:3000/verify-otp')
         .send({ unique_id: String(router.query.uniId),
                 otp: Number(otpString) })
@@ -35,6 +38,7 @@ export default function OTPLogin() {
     }  catch (error:any) {
       toast.error(error.response.body.message)    
           }
+          setLoading(false)
 }
 
 
@@ -43,6 +47,7 @@ export default function OTPLogin() {
       otpInputs.current[0].focus();
     }
   }, []);
+
 
   return (
     <>
@@ -53,9 +58,10 @@ export default function OTPLogin() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster
-  position="top-right"
+  position="top-center"
   reverseOrder={false}
 />
+<Spin spinning={loading}>
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
         <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
         <ArrowLeftOutlined onClick={() => router.push('/Forgotpassword')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
@@ -97,6 +103,7 @@ export default function OTPLogin() {
           </button>
         </div>
       </div>
+      </Spin>
     </>
   );
 }

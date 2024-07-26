@@ -4,13 +4,24 @@ import { useRouter } from "next/router";
 import Cookies from 'js-cookie';
 import Logo from "./Logo";
 import { GoogleOutlined, FacebookOutlined, UserAddOutlined } from '@ant-design/icons'; 
-import { useEffect } from "react";
+import { useState } from "react";
+import { Spin } from "antd";
 
 export default function Signup() {
     const router = useRouter();
-    useEffect(()=>{
-        Cookies.remove('authToken')
-    },[])
+    const [loading, setLoading] = useState(false);
+
+
+    const handleCreateAccountClick = () => {
+        setLoading(true);
+        router.push('/Signup');
+    };
+
+    const handleClick = () => {
+        setLoading(true);
+        router.push('/signin');
+    };
+
 
     return (
         <>
@@ -20,43 +31,45 @@ export default function Signup() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#ddd0dc' }}>
-                <div className="card" style={{ width: '90%', maxWidth: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
-                    <div style={{ textAlign: 'center' }}>
-                        <Logo />
-                    </div>
-                    <h2 className="text-center mb-4">Welcome to Page</h2>
-                    <button 
-                        type="button" 
-                        className="btn btn-danger btn-block mb-3 d-flex align-items-center" 
-                        style={{ width: '100%' }} 
-                        onClick={() => router.push('/Signup')}
-                    >
-                        <UserAddOutlined style={{ marginRight: '10px' }} /> 
-                        <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Create new account</span>
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn btn-warning btn-block mb-3 d-flex align-items-center" 
-                        style={{ width: '100%' }}
-                    >
-                        <GoogleOutlined style={{ marginRight: '10px' }} /> 
-                        <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Continue with Gmail</span>
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn btn-primary btn-block d-flex align-items-center" 
-                        style={{ width: '100%' }}
-                    >
-                        <FacebookOutlined style={{ marginRight: '10px' }} /> 
-                        <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Continue with Facebook</span>
-                    </button>
-                    <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '20px' }}>
-                        <p className="mb-0">You have an account already?</p>
-                        <button className="btn btn-link p-0 ml-2" onClick={() => router.push('/signin')}>Sign in</button>
+            <Spin spinning={loading}>
+                <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#ddd0dc' }}>
+                    <div className="card" style={{ width: '90%', maxWidth: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
+                        <div style={{ textAlign: 'center' }}>
+                            <Logo />
+                        </div>
+                        <h2 className="text-center mb-4">Welcome to Page</h2>
+                        <button 
+                            type="button" 
+                            className="btn btn-danger btn-block mb-3 d-flex align-items-center" 
+                            style={{ width: '100%' }} 
+                            onClick={handleCreateAccountClick}
+                        >
+                            <UserAddOutlined style={{ marginRight: '10px' }} /> 
+                            <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Create new account</span>
+                        </button>
+                        <button 
+                            type="button" 
+                            className="btn btn-warning btn-block mb-3 d-flex align-items-center" 
+                            style={{ width: '100%' }}
+                        >
+                            <GoogleOutlined style={{ marginRight: '10px' }} /> 
+                            <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Continue with Gmail</span>
+                        </button>
+                        <button 
+                            type="button" 
+                            className="btn btn-primary btn-block d-flex align-items-center" 
+                            style={{ width: '100%' }}
+                        >
+                            <FacebookOutlined style={{ marginRight: '10px' }} /> 
+                            <span className="mx-auto" style={{ flexGrow: 1, textAlign: 'center' }}>Continue with Facebook</span>
+                        </button>
+                        <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '20px' }}>
+                            <p className="mb-0">You have an account already?</p>
+                            <button className="btn btn-link p-0 ml-2" onClick={handleClick}>Sign in</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Spin>
         </>
     );
 }

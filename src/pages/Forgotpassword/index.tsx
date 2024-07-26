@@ -8,14 +8,18 @@ import nookies from 'nookies';
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Spin } from "antd";
 
 
 export default function ForgotPassword() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
 
   const handleSendResetLink = async () => {
     try {
+      setLoading(true)
       const response = await superagent.put('https://master.project.henceforthsolutions.com:3000/forget-password')
         .send({ email });
       nookies.set(null, 'reset_token', response.body.token, { path: '/' });
@@ -27,6 +31,7 @@ export default function ForgotPassword() {
     } catch (error:any) {
       toast.error(error.response.body.message)
        }
+       setLoading(false)
   };
 
   return (
@@ -38,9 +43,10 @@ export default function ForgotPassword() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster
-  position="top-right"
+  position="top-center"
   reverseOrder={false}
 />
+<Spin spinning={loading}>
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
         <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
         <ArrowLeftOutlined onClick={() => router.push('/signin')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
@@ -70,6 +76,7 @@ export default function ForgotPassword() {
           </button>
         </div>
       </div>
+      </Spin>
     </>
   );
 }

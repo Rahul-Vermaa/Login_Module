@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import nookies from 'nookies';
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 
 export default function SignUp() {
@@ -19,6 +20,8 @@ export default function SignUp() {
   const [name, setName] = useState('');
   const [selectedCountryCode, setSelectedCountryCode] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
+  const [loading, setLoading] = useState(false);
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,6 +30,7 @@ export default function SignUp() {
 
   const handleSignUp = async () => {
     try {
+      setLoading(true);
       const response = await superagent.post('https://master.project.henceforthsolutions.com:3000/signup')
         .send({
           first_name: name,
@@ -41,6 +45,8 @@ export default function SignUp() {
       router.push('/verifyemail'); 
     } catch (error:any) {
       toast.error(error.response.body.message)
+          }finally {
+            setLoading(false);
           }
   };
 
@@ -54,9 +60,10 @@ export default function SignUp() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster
-  position="top-right"
+  position="top-center"
   reverseOrder={false}
 />
+<Spin spinning={loading}>
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
         <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
         <ArrowLeftOutlined onClick={() => router.push('/')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
@@ -149,6 +156,7 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+      </Spin>
     </>
   );
 }
