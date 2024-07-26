@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import Head from "next/head";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from "next/router";
-import Logo from '../../component/Logo';
+import Logo from '../Logo';
 import request from 'superagent';
 import Cookies from 'js-cookie';
 import { ArrowLeftOutlined } from '@ant-design/icons';
