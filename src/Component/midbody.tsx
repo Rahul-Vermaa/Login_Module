@@ -6,6 +6,8 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from 'react';
 import { Spin } from 'antd';
+import { destroyCookie, parseCookies } from 'nookies';
+import path from 'path';
 
 
 const MiddleContent = () => {
@@ -29,6 +31,10 @@ const[loading , setLoading]= useState(false)
 
     const logout = () => {
         setLoading(true);
+        const token = parseCookies()
+        destroyCookie(null,"authToken",{
+            path:"/"
+        })
         router.push('/');
     };
 

@@ -16,16 +16,32 @@ export default function SignIn() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
-  const { state, setState } = useContext(MyContext);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const { state, setState } = useContext(MyContext);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSignIn = async () => {
+    setEmailError('');
+    setPasswordError('');
+    let valid = true;
+    if (!email) {
+      setEmailError('Email is required');
+      valid = false;
+    }
+    if (!password) {
+      setPasswordError('Password is required');
+      valid = false;
+    }
+    if (!valid) {
+      return;
+    }
     const token = Cookies.get('authToken');
     try {
       setLoading(true);
@@ -41,6 +57,8 @@ export default function SignIn() {
     }
   };
 
+
+  
   return (
     <>
       <Head>
@@ -71,6 +89,7 @@ export default function SignIn() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
+              {emailError && <div className="text-danger mb-3">{emailError}</div>}
               <div className="input-group mb-3">
                 <div className="input-group-append">
                   <span className="input-group-text" onClick={togglePasswordVisibility}>
@@ -85,18 +104,19 @@ export default function SignIn() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              {passwordError && <div className="text-danger mb-3">{passwordError}</div>}
             </div>
             {error && <div className="alert alert-danger" role="alert">{error}</div>}
             <div>
               <button style={{ color: 'red', marginBottom: '10px' }} className="btn btn-link p-0 ml-2" onClick={() => router.push('/Forgotpassword')}>Forget Password</button>
             </div>
-            <button
+            <button  
               type="button"
               className="btn btn-danger"
               onClick={handleSignIn}
-            >
+            >  
               Sign in
-            </button>
+            </button>   
             <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
               <p className="mb-0">Don't Have an account?</p>
               <button className="btn btn-link p-0 ml-2" onClick={() => router.push('/Signup')}>Sign up</button>

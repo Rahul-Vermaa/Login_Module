@@ -6,9 +6,11 @@ import MiddleContent from "../../Component/midbody";
 import { MyContext } from "@/context/provider";
 import { useContext } from "react";
 
+
 export default function Signup() {
     const { state } = useContext(MyContext);
     
+
     return (
         <>
             <Head>

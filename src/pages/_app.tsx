@@ -21,10 +21,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   
   return(
+
 <>
  <MyProvider> <Component {...pageProps} /> 
  </MyProvider>
-</>
+ </>
+
 )
 }
  

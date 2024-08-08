@@ -6,11 +6,9 @@ import { useRouter } from "next/router";
 import Logo from "../Logo";
 import superagent from 'superagent';
 import Cookies from 'js-cookie';
-import nookies from 'nookies';
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-
 
 export default function SignUp() {
   const router = useRouter();
@@ -21,14 +19,38 @@ export default function SignUp() {
   const [selectedCountryCode, setSelectedCountryCode] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-
   const handleSignUp = async () => {
+    let valid = true;
+    
+    if (!name) {
+      setNameError('Name is required');
+      valid = false;
+    }
+    if (!email) {
+      setEmailError('Email is required');
+      valid = false;
+    }
+    if (!password) {
+      setPasswordError('Password is required');
+      valid = false;
+    }
+    if (!selectedCountryCode || !mobileNumber) {
+      setPhoneError('Country code and mobile number are required');
+      valid = false;
+    }
+    if (!valid) {
+      return;
+    }
+
     try {
       setLoading(true);
       const response = await superagent.post('https://master.project.henceforthsolutions.com:3000/signup')
@@ -39,18 +61,16 @@ export default function SignUp() {
           country_code: selectedCountryCode,
           phone: mobileNumber,
         });
-        Cookies.set('authToken', response.body.access_token);
+      Cookies.set('authToken', response.body.access_token);
       console.log('Account registered successfully:', response.body);
-      nookies.set(null, 'token', response.body.token, { path: '/' });
       router.push('/verifyemail'); 
     } catch (error:any) {
-      toast.error(error.response.body.message)
-          }finally {
-            setLoading(false);
-          }
+      toast.error(error.response.body.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  
   return (
     <>
       <Head>
@@ -59,103 +79,117 @@ export default function SignUp() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
-<Spin spinning={loading}>
-      <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
-        <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
-        <ArrowLeftOutlined onClick={() => router.push('/')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
-          <div style={{ textAlign: 'center' }}>
-            <Logo />
-          </div>
-          <h2 className="text-center mb-4">Sign up</h2>
-          <div className="form-group">
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text"><i className="bi bi-person"></i></span>
-              </div>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+      <Toaster position="top-center" reverseOrder={false} />
+      <Spin spinning={loading}>
+        <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#DDD0DC' }}>
+          <div className="card" style={{ width: '32rem', backgroundColor: 'white', padding: '20px', borderRadius: '15px' }}>
+            <ArrowLeftOutlined onClick={() => router.push('/')} style={{ cursor: 'pointer', fontSize: '1.5rem', position: 'absolute', top: '20px', right: '470px' }} />
+            <div style={{ textAlign: 'center' }}>
+              <Logo />
             </div>
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text"><i className="bi bi-envelope"></i></span>
+            <h2 className="text-center mb-4">Sign up</h2>
+            <div className="form-group">
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text"><i className="bi bi-person"></i></span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    setNameError('');
+                  }}
+                />
               </div>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              {nameError && <div className="text-danger mb-3">{nameError}</div>}
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text"><i className="bi bi-envelope"></i></span>
+                </div>
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError('');
+                  }}
+                />
+              </div>
+              {emailError && <div className="text-danger mb-3">{emailError}</div>}
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text"><i className="bi bi-lock"></i></span>
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-control"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError('');
+                  }}
+                />
+                <div className="input-group-append">
+                  <span className="input-group-text" onClick={togglePasswordVisibility}>
+                    <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+                  </span>
+                </div>
+              </div>
+              {passwordError && <div className="text-danger mb-3">{passwordError}</div>}
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text"><i className="bi bi-telephone"></i></span>
+                </div>
+                <select
+                  className="form-control"
+                  value={selectedCountryCode}
+                  onChange={(e) => {
+                    setSelectedCountryCode(e.target.value);
+                    setPhoneError('');
+                  }}
+                >
+                  <option value="">Select</option>
+                  <option value="+91">🇮🇳 (+91)</option>
+                  <option value="+1">🇰🇭 (+1)</option>
+                  <option value="+44">🇬🇧 (+44)</option>
+                </select>
+                <input
+                  style={{ width: '254px' }}
+                  type="text"
+                  className="form-control"
+                  placeholder="Mobile number"
+                  value={mobileNumber}
+                  onChange={(e) => {
+                    setMobileNumber(e.target.value);
+                    setPhoneError('');
+                  }}
+                />
+              </div>
+              {phoneError && <div className="text-danger mb-3">{phoneError}</div>}
             </div>
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text"><i className="bi bi-lock"></i></span>
-              </div>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div className="input-group-append">
-                <span className="input-group-text" onClick={togglePasswordVisibility}>
-                  <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
-                </span>
-              </div>
+            <div>
+              <input className="btn btn-link p-0 ml-2" type="checkbox" />
+              <p style={{ fontSize: '12px' }}>By clicking create account you agree to the Terms Of Service and Privacy Policy</p>
             </div>
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text"><i className="bi bi-telephone"></i></span>
-              </div>
-              <select
-              
-                className="form-control"
-                value={selectedCountryCode}
-                onChange={(e) => setSelectedCountryCode(e.target.value)}
-              >
-                <option value="">Select</option>
-                <option value="+91">India (+91)</option>
-                <option value="+1">United States (+1)</option>
-                <option value="+44">United Kingdom (+44)</option>
-              </select>
-              <input
-              style={{width:'254px'}}
-                type="text"
-                className="form-control"
-                placeholder="Mobile number"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
-              />
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={handleSignUp}
+            >
+              Sign up
+            </button>
+            <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
+              <p className="mb-0">Already have an account?</p>
+              <button className="btn btn-link p-0 ml-2" onClick={() => router.push('/signin')}>Sign in</button>
             </div>
-          </div>
-          <div>
-            <input className="btn btn-link p-0 ml-2" type="checkbox" /> 
-            <p style={{ fontSize: '12px' }}>By clicking create account you agree to the Terms Of Service and Privacy Policy</p>
-          </div>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={handleSignUp}
-            disabled={!name || !email || !password || !selectedCountryCode || !mobileNumber}
-          >
-            Sign up
-          </button>
-          <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
-            <p className="mb-0">Already have an account?</p>
-            <button className="btn btn-link p-0 ml-2" onClick={() => router.push('/signin')}>Sign in</button>
           </div>
         </div>
-      </div>
       </Spin>
     </>
   );
